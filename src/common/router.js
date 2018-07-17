@@ -61,6 +61,7 @@ const dynamicWrapper = (app, models, component) => {
   });
 };
 
+// 扁平化菜单数据， 键为 path
 function getFlatMenuData(menus) {
   let keys = {};
   menus.forEach(item => {
@@ -74,6 +75,8 @@ function getFlatMenuData(menus) {
   return keys;
 }
 
+
+// 得到最终计算出来的 路由组件
 export const getRouterData = app => {
 
   // routerConfig 的 key 值可以为 /dashboard/:id, /icon/:foo(\\d+)

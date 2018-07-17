@@ -94,6 +94,15 @@ enquireScreen(b => {
   isMobile = b;
 });
 
+
+
+
+
+
+
+/**
+ * 渲染主题路由内容， 如果无权限（前面已经经过了登录权限校验，所以到这里的渲染肯定是登录了的），重定向到 403
+ * */
 class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,

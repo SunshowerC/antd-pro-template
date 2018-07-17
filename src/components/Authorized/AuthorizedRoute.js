@@ -2,6 +2,10 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Authorized from './Authorized';
 
+
+/**
+ * 校验路由组件，如果无权限访问， 重定向
+ * */
 class AuthorizedRoute extends React.Component {
   render() {
     const { component: Component, render, authority, redirectPath, ...rest } = this.props;

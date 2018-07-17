@@ -156,16 +156,18 @@ const menuData = [
   },
 ];
 
+// 为 所有的 路由 格式化 path 与 authority
 function formatter(data, parentPath = '/', parentAuthority) {
   return data.map(item => {
     let { path } = item;
+    // 如果不是 URL , 则加上父路径进行拼凑
     if (!isUrl(path)) {
       path = parentPath + item.path;
     }
     const result = {
       ...item,
       path,
-      authority: item.authority || parentAuthority,
+      authority: item.authority || parentAuthority, // 当自身没有指明权限，则继承父路由组件的权限设定
     };
     if (item.children) {
       result.children = formatter(item.children, `${parentPath}${item.path}/`, item.authority);

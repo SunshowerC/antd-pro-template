@@ -8,14 +8,15 @@ import { getQueryPath } from './utils/utils';
 
 const { ConnectedRouter } = routerRedux;
 const { AuthorizedRoute } = Authorized;
-console.log('qweqwe', AuthorizedRoute)
 
 
-
+/**
+ * 路由根入口，从这里开始匹配当前的layout 应该是 BasicLayout 还是 UserLayout。
+ * 并且开始第一层校验： 用户登录校验，如果用户没有权限，直接跳转到 登录页面
+ * */
 function RouterConfig({ history, app }) {
   console.log('app', app)
   const routerData = getRouterData(app);
-  // console.log('routerDatarouterDatarouterData', routerData)
 
   // 总共只有两种layout ,
   // UserLayout : 登录注册时的layout
