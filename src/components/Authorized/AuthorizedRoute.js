@@ -10,7 +10,6 @@ class AuthorizedRoute extends React.Component {
   render() {
     const { component: Component, render, authority, redirectPath, ...rest } = this.props;
 
-    console.log('this.props', this.props.location.pathname, redirectPath)
 
     /* 没有权限， 渲染重定向路由 */
     return (
