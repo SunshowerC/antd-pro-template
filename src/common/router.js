@@ -38,7 +38,6 @@ const dynamicWrapper = (app, models, component) => {
   }
 
 
-  console.log('component to str' , component.toString())
 
   // () => import('module')
   return Loadable({
@@ -226,7 +225,6 @@ export const getRouterData = app => {
     routerData[path] = router;
   });
 
-  console.log('routerData', routerData)
 
   return routerData;
 };
