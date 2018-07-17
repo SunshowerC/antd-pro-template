@@ -23,6 +23,8 @@ const { AuthorizedRoute, check } = Authorized;
 /**
  * 根据菜单取得重定向地址.
  */
+// [{ from: "/dashboard", to: "/dashboard/analysis" }, {from: '/form', to: '/form/basic-form'} ]
+// 定义重定向列表，如果 访问 /dashboard , 将会重定向到 /dashboard/analysis
 const redirectData = [];
 const getRedirect = item => {
   if (item && item.children) {
@@ -37,7 +39,11 @@ const getRedirect = item => {
     }
   }
 };
-getMenuData().forEach(getRedirect);
+let mData = getMenuData()
+mData.forEach(getRedirect);
+
+
+
 
 /**
  * 获取面包屑映射
@@ -145,16 +151,17 @@ class BasicLayout extends React.PureComponent {
     const urlParams = new URL(window.location.href);
 
     const redirect = urlParams.searchParams.get('redirect');
-    // Remove the parameters in the url
+    // Remove the parameters in the url， 有重定向参数，就return 该参数值
     if (redirect) {
       urlParams.searchParams.delete('redirect');
       window.history.replaceState(null, 'redirect', urlParams.href);
     } else {
       const { routerData } = this.props;
-      // get the first authorized route path in routerData
+      // get the first authorized route path in routerData; 获取第一个拥有权限的 路由
       const authorizedPath = Object.keys(routerData).find(
         item => check(routerData[item].authority, item) && item !== '/'
       );
+
       return authorizedPath;
     }
     return redirect;
@@ -211,6 +218,9 @@ class BasicLayout extends React.PureComponent {
     } = this.props;
     const { isMobile: mb } = this.state;
     const bashRedirect = this.getBaseRedirect();
+    const routes = getRoutes(match.path, routerData)
+
+
     const layout = (
       <Layout>
         <SiderMenu
@@ -242,10 +252,13 @@ class BasicLayout extends React.PureComponent {
           </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <Switch>
+              { /* 如果redirect 中的 URL 被匹配, 自动重定向 */}
               {redirectData.map(item => (
                 <Redirect key={item.from} exact from={item.from} to={item.to} />
               ))}
+
               {getRoutes(match.path, routerData).map(item => (
+                // 第二层权限校验，如果没有权限，重定向到 403
                 <AuthorizedRoute
                   key={item.key}
                   path={item.path}
@@ -256,6 +269,7 @@ class BasicLayout extends React.PureComponent {
                 />
               ))}
               <Redirect exact from="/" to={bashRedirect} />
+              {/* 以上都不匹配，直接跳过 */}
               <Route render={NotFound} />
             </Switch>
           </Content>

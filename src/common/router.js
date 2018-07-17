@@ -24,6 +24,7 @@ const dynamicWrapper = (app, models, component) => {
 
   // () => require('module')
   // transformed by babel-plugin-dynamic-import-node-sync
+  // 此处全部符合条件，不会进入之后的 Loadable
   if (component.toString().indexOf('.then(') < 0) {
     return props => {
       if (!routerDataCache) {
@@ -35,6 +36,10 @@ const dynamicWrapper = (app, models, component) => {
       });
     };
   }
+
+
+  console.log('component to str' , component.toString())
+
   // () => import('module')
   return Loadable({
     loader: () => {
@@ -70,8 +75,11 @@ function getFlatMenuData(menus) {
 }
 
 export const getRouterData = app => {
+
+  // routerConfig 的 key 值可以为 /dashboard/:id, /icon/:foo(\\d+)
   const routerConfig = {
     '/': {
+      // 此处 dynamicWrapper 的第二个参数是 models , 表明这个组件用到的 redux 文件！？
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
     '/dashboard/analysis': {
@@ -161,12 +169,14 @@ export const getRouterData = app => {
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },
-    '/user/login': {
-      component: dynamicWrapper(app, ['login'], () => import('../routes/User/Login')),
-    },
     '/user/register': {
       component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
     },
+
+    '/user/login': {
+      component: dynamicWrapper(app, ['login'], () => import('../routes/User/Login')),
+    },
+
     '/user/register-result': {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
     },
@@ -174,18 +184,27 @@ export const getRouterData = app => {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
     // },
   };
+
   // Get name from ./menu.js or just set it in the router data.
+  // menuData = { '/dashboard': {name: .., icon: .., path: ..}, '/dashboard/analysis': ... }
   const menuData = getFlatMenuData(getMenuData());
+
+
 
   // Route configuration data
   // eg. {name,authority ...routerConfig }
   const routerData = {};
+
+
   // The route matches the menu
+  // 将 routerConfig 和 menu.js 匹配 合并，生成最终的 routerData
   Object.keys(routerConfig).forEach(path => {
     // Regular match item name
     // eg.  router /user/:id === /user/chen
-    const pathRegexp = pathToRegexp(path);
+    let params = [] // router path (如 /dashboard/:id) 定义的变量
+    const pathRegexp = pathToRegexp(path, params);
     const menuKey = Object.keys(menuData).find(key => pathRegexp.test(`${key}`));
+
     let menuItem = {};
     // If menuKey is not empty
     if (menuKey) {
@@ -203,5 +222,8 @@ export const getRouterData = app => {
     };
     routerData[path] = router;
   });
+
+  console.log('routerData', routerData)
+
   return routerData;
 };

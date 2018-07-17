@@ -19,8 +19,9 @@ function isPromise(obj) {
  * @param { 未通过的组件 no pass components } Exception
  */
 const checkPermissions = (authority, currentAuthority, target, Exception) => {
-  // 没有判定权限.默认查看所有
+  // authority为空，默认拥有访问权限权限， 直接return target
   // Retirement authority, return target;
+
   if (!authority) {
     return target;
   }
