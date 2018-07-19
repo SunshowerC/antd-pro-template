@@ -1,4 +1,4 @@
-English | [简体中文](./README.zh-CN.md)
+[English](./README.md) | 简体中文
 
 # Ant Design Pro
 
@@ -8,75 +8,71 @@ English | [简体中文](./README.zh-CN.md)
 [![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro#info=devDependencies&view=list)
 [![Gitter](https://badges.gitter.im/ant-design/ant-design-pro.svg)](https://gitter.im/ant-design/ant-design-pro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-An out-of-box UI solution for enterprise applications as a React boilerplate.
+开箱即用的中台前端/设计解决方案。
 
 ![](https://gw.alipayobjects.com/zos/rmsportal/xEdBqwSzvoSapmnSnYjU.png)
 
-- Preview: http://preview.pro.ant.design
-- Home Page: http://pro.ant.design
-- Documentation: http://pro.ant.design/docs/getting-started
-- ChangeLog: http://pro.ant.design/docs/changelog
-- FAQ: http://pro.ant.design/docs/faq
-- Mirror Site in China: http://ant-design-pro.gitee.io
+- 预览：http://preview.pro.ant.design
+- 首页：http://pro.ant.design/index-cn
+- 使用文档：http://pro.ant.design/docs/getting-started-cn
+- 更新日志: http://pro.ant.design/docs/changelog-cn
+- 常见问题：http://pro.ant.design/docs/faq-cn
+- 国内镜像：http://ant-design-pro.gitee.io
 
-## Translation Recruitment :loudspeaker:
+## 特性
 
-We need your help: https://github.com/ant-design/ant-design-pro/issues/120
+- :gem: **优雅美观**：基于 Ant Design 体系精心设计
+- :triangular_ruler: **常见设计模式**：提炼自中后台应用的典型页面和场景
+- :rocket: **最新技术栈**：使用 React/dva/antd 等前端前沿技术开发
+- :iphone: **响应式**：针对不同屏幕大小设计
+- :art: **主题**：可配置的主题满足多样化的品牌诉求
+- :globe_with_meridians: **国际化**：内建业界通用的国际化方案
+- :gear: **最佳实践**：良好的工程实践助您持续产出高质量代码
+- :1234: **Mock 数据**：实用的本地数据调试方案
+- :white_check_mark: **UI 测试**：自动化测试保障前端产品质量
 
-## Features
-
-- :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
-- :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
-- :rocket: **State of The Art Development**: Newest development stack of React/dva/antd
-- :iphone: **Responsive**: Designed for varies of screen size
-- :art: **Theming**: Customizable theme with simple config
-- :globe_with_meridians: **International**: Built-in i18n solution
-- :gear: **Best Practice**: Solid workflow make your code health
-- :1234: **Mock development**: Easy to use mock development solution
-- :white_check_mark: **UI Test**: Fly safely with unit test and e2e test
-
-## Templates
+## 模板
 
 ```
 - Dashboard
-  - Analytic
-  - Monitor
-  - Workspace
-- Form
-  - Basic Form
-  - Step Form
-  - Advanced From
-- List
-  - Standard Table
-  - Standard List
-  - Card List
-  - Search List (Project/Applications/Article)
-- Profile
-  - Simple Profile
-  - Advanced Profile
-- Result
-  - Success
-  - Failed
-- Exception
-  - 403
-  - 404
-  - 500
-- User
-  - Login
-  - Register
-  - Register Result
+  - 分析页
+  - 监控页
+  - 工作台
+- 表单页
+  - 基础表单页
+  - 分步表单页
+  - 高级表单页
+- 列表页
+  - 查询表格
+  - 标准列表
+  - 卡片列表
+  - 搜索列表（项目/应用/文章）
+- 详情页
+  - 基础详情页
+  - 高级详情页
+- 结果
+  - 成功页
+  - 失败页
+- 异常
+  - 403 无权限
+  - 404 找不到
+  - 500 服务器出错
+- 帐户
+  - 登录
+  - 注册
+  - 注册成功
 ```
 
-## Usage
+## 使用
 
 ```bash
 $ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
 $ cd ant-design-pro
 $ npm install
-$ npm start         # visit http://localhost:8000
+$ npm start         # 访问 http://localhost:8000
 ```
 
-Or you can use the command tool: [ant-design-pro-cli](https://github.com/ant-design/ant-design-pro-cli)
+也可以使用集成化的 [ant-design-pro-cli](https://github.com/ant-design/ant-design-pro-cli) 工具。
 
 ```bash
 $ npm install ant-design-pro-cli -g
@@ -84,16 +80,49 @@ $ mkdir pro-demo && cd pro-demo
 $ pro new
 ```
 
-More instruction at [documentation](http://pro.ant.design/docs/getting-started).
+更多信息请参考 [使用文档](http://pro.ant.design/docs/getting-started)。
 
-## Compatibility
 
-Modern browsers and IE11.
+## 目录结构
+```
+├── mock                     # 本地模拟数据
+├── public
+│   └── favicon.ico          # Favicon
+├── src
+│   ├── assets               # 本地静态资源
+│   ├── common               # 应用公用配置，如导航信息
+│   ├── components           # 业务通用组件
+│   ├── layouts              # 通用布局
+│   ├── models               # dva model
+│   ├── routes               # 业务页面入口和常用模板
+│   ├── services             # 后台接口服务
+│   ├── utils                # 工具库
+│   │
+│   ├── theme.js             # 主题配置
+│   ├── index.ejs            # HTML 入口模板
+│   ├── index.js             # 应用入口
+│   ├── index.less           # 全局样式
+│   └── router.js            # 路由入口
+│
+├── .babelrc.js
+├── .eslintrc.js
+├── .prettierrc
+├── .stylelintrc
+├── .roadhogrc.mock.js       # mock 配置
+├── .webpackrc.js
+├── README.md
+└── package.json
+```
 
-## Contributing
 
-Any Contribution of following ways will be welcome:
+## 兼容性
 
-- Use Ant Design Pro in your daily work.
-- Submit [issue](http://github.com/ant-design/ant-design-pro/issues) to report bug or ask questions.
-- Propose [pull request](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
+现代浏览器及 IE11。
+
+## 参与贡献
+
+我们非常欢迎你的贡献，你可以通过以下方式和我们一起共建 :smiley:：
+
+- 在你的公司或个人项目中使用 Ant Design Pro。
+- 通过 [Issue](http://github.com/ant-design/ant-design-pro/issues) 报告 bug 或进行咨询。
+- 提交 [Pull Request](http://github.com/ant-design/ant-design-pro/pulls) 改进 Pro 的代码。

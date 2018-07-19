@@ -19,7 +19,7 @@ export default {
         type: 'changeLoginStatus',
         payload: response,
       });
-      // Login successfully
+      // Login successfully ， 重定向
       if (response.status === 'ok') {
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
