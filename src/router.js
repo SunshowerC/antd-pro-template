@@ -15,7 +15,7 @@ const { AuthorizedRoute } = Authorized;
  * 并且开始第一层校验： 用户登录校验，如果用户没有权限，直接跳转到 登录页面
  * */
 function RouterConfig({ history, app }) {
-  console.log('app', app)
+  // console.log('app', app)
   const routerData = getRouterData(app);
 
   // 总共只有两种layout ,

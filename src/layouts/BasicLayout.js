@@ -39,7 +39,7 @@ const getRedirect = item => {
     }
   }
 };
-let mData = getMenuData()
+const mData = getMenuData()
 mData.forEach(getRedirect);
 
 
@@ -227,7 +227,7 @@ class BasicLayout extends React.PureComponent {
     } = this.props;
     const { isMobile: mb } = this.state;
     const bashRedirect = this.getBaseRedirect();
-    const routes = getRoutes(match.path, routerData)
+    // const routes = getRoutes(match.path, routerData)
 
 
     const layout = (

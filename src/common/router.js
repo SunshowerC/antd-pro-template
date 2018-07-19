@@ -150,7 +150,7 @@ export const getRouterData = app => {
   Object.keys(routerConfig).forEach(path => {
     // Regular match item name
     // eg.  router /user/:id === /user/chen
-    let params = [] // router path (如 /dashboard/:id) 定义的变量
+    const params = [] // router path (如 /dashboard/:id) 定义的变量
     const pathRegexp = pathToRegexp(path, params);
     const menuKey = Object.keys(menuData).find(key => pathRegexp.test(`${key}`));
 
